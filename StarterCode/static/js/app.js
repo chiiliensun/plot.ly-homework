@@ -147,7 +147,7 @@ function updateGaugePlot(samples) {
           type: "indicator",
           mode: "gauge+number+delta",
           value: wfreq,
-          title: { text: "Speed", font: { size: 24} },
+          title: { text: "Belly Button Washing Frequency", font: { size: 24} },
           delta: { reference: 400, increasing: {color: "RebeccaPurple" } },
           gauge: {
             axis: { range: [0,9], tickwidth: 1, tickcolor: "darkblue"}
