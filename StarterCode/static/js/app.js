@@ -67,9 +67,12 @@ function updatePlot(samplesBar) {
         y: dataSamples.sample_values,
         mode: "markers",
         marker: {
+          // Use sample_values for the marker size.
           size: dataSamples.sample_values,
+          // Use otu_ids for the marker colors.
           color: dataSamples.otu_ids,
         },
+        // Use otu_labels for the text values.
         text: dataSamples.otu_labels,
       }];
 
@@ -81,6 +84,7 @@ function updatePlot(samplesBar) {
     });
 };
 
+// 4. Display the sample metadata, i.e., an individual's demographic information.
 
 // Update demographic panel with change in drop down
 function updateMetaData(samplesDemo) {
@@ -112,15 +116,15 @@ function updateMetaData(samplesDemo) {
 
 
 
-// Use sample_values for the marker size.
 
 
-// Use otu_ids for the marker colors.
 
 
-// Use otu_labels for the text values.
 
-// 4. Display the sample metadata, i.e., an individual's demographic information.
+
+
+
+
 
 
 // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
