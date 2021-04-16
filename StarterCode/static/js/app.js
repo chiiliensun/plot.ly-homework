@@ -47,15 +47,16 @@ function updatePlot(samplesBar) {
         orientation: "h",
         // Use otu_labels as the hovertext for the chart.
         text: dataSamples.otu_labels,
+        // sorts graph to make it easier to read - Plotly documentation
         yaxis: {type: "category"}
         }];
 
-
+      // Set layout with title
       let layout1 = {
         title: "Top OTUs Found in an Individual",
       };
 
-
+      // Build plot
       Plotly.newPlot("bar", trace1, layout1);
 
       // 3. Create a bubble chart that displays each sample.
@@ -102,6 +103,8 @@ function updateMetaData(samplesDemo) {
       // clear the previous data
       panel.html("");
 
+// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+
       // iterate through keys JavaScript 02-Activities, 06 & 07
       Object.entries(demoResults).forEach(([key, value]) => {
         // append on the panel variable for correct key values
@@ -127,7 +130,7 @@ function updateMetaData(samplesDemo) {
 
 
 
-// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+
 
 
 // 6. Update all of the plots any time that a new sample is selected.
