@@ -59,8 +59,11 @@ function updatePlot(samplesBar) {
       Plotly.newPlot("bar", trace1, layout1);
 
       // 3. Create a bubble chart that displays each sample.
+      // Trace1 to plot bubble graph
       let trace2 = [{
+        // Use otu_ids for the x values.
         x: dataSamples.out_ids,
+        // Use sample_values for the y values.
         y: dataSamples.sample_values,
         mode: "markers",
         marker: {
@@ -103,10 +106,10 @@ function updateMetaData(samplesDemo) {
     });
 };
 
-// Use otu_ids for the x values.
 
 
-// Use sample_values for the y values.
+
+
 
 
 // Use sample_values for the marker size.
