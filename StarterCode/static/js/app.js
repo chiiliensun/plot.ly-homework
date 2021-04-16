@@ -130,11 +130,22 @@ function updateMetaData(samplesDemo) {
     });
 };
 
+  // Gauge chart BONUS
+function updateGaugePlot(samplesGauge) {
+
+  // Use D3 library to read in samples.json
+    d3.json('samples2.json').then(data => {
+
+        // filtering data by the input value
+        let samplesG = data.metadata.filter(metaID => metaID.id == samplesGauge);
+        let gauge = samplesG[0];
+        let wfreq = gauge.wfreq;
+
 
 // 6. Update all of the plots any time that a new sample is selected.
 function optionChanged(samples) {
   updateBarPlot(samplesBar);
-  // updateBubblesPlot(samples);
+  updateBubblesPlot(samples);
   updateMetaData(samplesDemo);
 };
 
