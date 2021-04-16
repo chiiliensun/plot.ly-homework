@@ -1,6 +1,6 @@
 
 // Use the D3 library to read in samples.json
-d3.json('samples.json').then(data => {
+d3.json('samples2.json').then(data => {
     console.log(data);
 })
 
@@ -13,10 +13,17 @@ function init() {
   // Use D3 library to read in samples.json to select the dropdown menu
   d3.json('samples.json').then(data => {
 
-  };
+      // Assign the value of the dropdown menu option to a variable
+      data.names.forEach(function(selectnames){
+        dropdownMenu.append("option").text(selectnames).property("value");
+      });
 
+      // Set name from the list for functions to build plots
+      getPlot(data.names[0]);
+      getMeta(data.names[0]);
+  });
+};
 
-}
 // Function to read in data from samples.JSON for bar chart
 function barchartData
 // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
