@@ -60,11 +60,16 @@ function updatePlot(samplesBar) {
 };
 
 // 3. Create a bubble chart that displays each sample.
-function updateMetaData(samplesBubbles) {
+
+// Update demographic panel with change in drop down
+function updateMetaData(samplesDemo) {
+
+    // Use D3 library to read in samples.json to select the dropdown menu
     d3.json('samples2.json').then(data => {
 
       // filtering data by the input value
-      let metaSamples = data.metadata.filter(metaID => metaID.id ===samplesBubbles)[0];
+      let metaSamples = data.metadata.filter(metaID => metaID.id == samplesDemo);
+      let demoResults = metaSamples[0];
 
       // use d3 to select the demographics panel
       let panel = d3.select("#sample-metadata")
@@ -73,12 +78,11 @@ function updateMetaData(samplesBubbles) {
       panel.html("");
 
       // iterate through keys JavaScript 02-Activities, 06 & 07
-      Object.entries(metaSamples).forEach(([key, value]) => {
+      Object.entries(demoResults).forEach(([key, value]) => {
         // append on the panel variable for correct key values
-        panel.append("h5").text()
-        console.log(`Key: ${key}, Value: ${value}`));
-    };
-
+        panel.append("h6").text(`${key}.toUpperCase()}: ${value}`);
+      });
+    });
 };
 
 // Use otu_ids for the x values.
