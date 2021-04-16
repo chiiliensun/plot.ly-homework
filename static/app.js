@@ -1,9 +1,4 @@
 
-// Use the D3 library to read in samples.json - starter
-// d3.json('samples2.json').then(data => {
-//     console.log(data);
-// })
-
 // Initializes the page with a default plot
 function init() {
 
@@ -11,7 +6,7 @@ function init() {
   let dropdownMenu = d3.select("#selDataset");
 
   // Use D3 library to read in samples.json to select the dropdown menu
-  d3.json("samples2.json").then(data => {
+  d3.json("/samples2.json").then(data => {
 
       // Assign the value of the dropdown menu option to a variable
       data.names.forEach(function(name) {
