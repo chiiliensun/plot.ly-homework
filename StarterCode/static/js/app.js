@@ -80,7 +80,7 @@ function updateMetaData(samplesDemo) {
       // iterate through keys JavaScript 02-Activities, 06 & 07
       Object.entries(demoResults).forEach(([key, value]) => {
         // append on the panel variable for correct key values
-        panel.append("h6").text(`${key}.toUpperCase()}: ${value}`);
+        panel.append("h6").text(`${key}: ${value}`);
       });
     });
 };
