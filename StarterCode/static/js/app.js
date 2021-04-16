@@ -22,20 +22,21 @@ function init() {
       updateBarPlot(data.names[0]);
       updateBubblesPlot(data.names[0]);
       updateMetaData(data.names[0]);
+      updateGaugePlot(data.names[0]);
   });
 };
 
 // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
 
 // Function to read in data from samples.JSON for bar chart
-function updateBarPlot(samplesBar) {
+function updateBarPlot(samples) {
 
   // Use D3 library to read in samples.json
     d3.json('samples2.json').then(data => {
 
 
       // filtering data by the input value
-      let dataSamples = data.samples.filter(nameID => nameID.id === samplesBar)[0];
+      let dataSamples = data.samples.filter(nameID => nameID.id === samples)[0];
 
 
       // Trace1 to plot bar graph
@@ -62,13 +63,13 @@ function updateBarPlot(samplesBar) {
     });
 };
       // 3. Create a bubble chart that displays each sample.
-function updateBubblesPlot(samplesBubbles) {
+function updateBubblesPlot(samples) {
 
   // Use D3 library to read in samples.json
     d3.json('samples2.json').then(data => {
 
       // filtering data by the input value
-      let bubbles = data.samples.filter(bubbleID => bubbleID.id == samplesBubbles);
+      let bubbles = data.samples.filter(bubbleID => bubbleID.id == samples);
       let sv_bubbles = bubbles.map(d => d.sample_values);
       let otuids_bubbles = bubbles.map(d => d.otu_ids);
       let label_bubbles = bubbles.map(d => d.otu_labels);
@@ -105,13 +106,13 @@ function updateBubblesPlot(samplesBubbles) {
 // 4. Display the sample metadata, i.e., an individual's demographic information.
 
 // Update demographic panel with change in drop down
-function updateMetaData(samplesDemo) {
+function updateMetaData(samples) {
 
     // Use D3 library to read in samples.json to select the dropdown menu
     d3.json('samples2.json').then(data => {
 
       // filtering data by the input value
-      let metaSamples = data.metadata.filter(metaID => metaID.id == samplesDemo);
+      let metaSamples = data.metadata.filter(metaID => metaID.id == samples);
       let demoResults = metaSamples[0];
 
       // use d3 to select the demographics panel
@@ -131,22 +132,43 @@ function updateMetaData(samplesDemo) {
 };
 
   // Gauge chart BONUS
-function updateGaugePlot(samplesGauge) {
+function updateGaugePlot(samples) {
 
   // Use D3 library to read in samples.json
     d3.json('samples2.json').then(data => {
 
         // filtering data by the input value
-        let samplesG = data.metadata.filter(metaID => metaID.id == samplesGauge);
+        let samplesG = data.metadata.filter(metaID => metaID.id == samples);
         let gauge = samplesG[0];
         let wfreq = gauge.wfreq;
 
+        // guage plot construction
+        let trace3 = [{
+          type: "indicator",
+          mode: "gauge+number+delta",
+          value: wfreq,
+          title: { text: "Speed", font: { size: 24} },
+          delta: { reference: 400, increasing: {color: "RebeccaPurple" } },
+          gauge: {
+            axis: { range: [0,9], tickwidth: 1, tickcolor: "darkblue"}
+          }
+        }];
+
+        let layout3 = {
+          height: 300,
+          width: 400
+        };
+
+        Plotly.newPlot("gauge", trace3, layout3);
+      });
+  };
 
 // 6. Update all of the plots any time that a new sample is selected.
 function optionChanged(samples) {
-  updateBarPlot(samplesBar);
+  updateBarPlot(samples);
   updateBubblesPlot(samples);
-  updateMetaData(samplesDemo);
+  updateMetaData(samples);
+  updateGaugePlot(samples);
 };
 
 // end/update dashbaord
