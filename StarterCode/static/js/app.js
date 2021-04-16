@@ -31,17 +31,14 @@ function updatePlot(samples) {
     d3.json('samples2.json').then(data => {
       // filtering data by the input value
       let dataSamples = data.samples.filter(nameID => nameID.id === samples)[0];
-      let sampleValues = dataSamples.sample_values;
-      let otuIds = dataSamples.otu_ids;
-      let otuLabels = dataSamples.otu_labels;
 
       // Trace1 to plot bar graph
       let trace1 = [{
-        x: sampleValues.slice(0,10).reverse(),
-        y: otuIds.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(),
+        x: dataSamples.sample_values.slice(0,10).reverse(),
+        y: dataSamples.otu_ids.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(),
         type: "bar",
         orientation: "h",
-        text: otuLabels
+        text: dataSamples.otu_labels,
         }];
 
 
