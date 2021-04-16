@@ -47,19 +47,37 @@ function updatePlot(samplesBar) {
         orientation: "h",
         // Use otu_labels as the hovertext for the chart.
         text: dataSamples.otu_labels,
+        yaxis: {type: "category"}
         }];
 
 
       let layout1 = {
-        title: "Top OTUs Found in an Individual"
+        title: "Top OTUs Found in an Individual",
       };
 
 
       Plotly.newPlot("bar", trace1, layout1);
+
+      // 3. Create a bubble chart that displays each sample.
+      let trace2 = [{
+        x: dataSamples.out_ids,
+        y: dataSamples.sample_values,
+        mode: "markers",
+        marker: {
+          size: dataSamples.sample_values,
+          color: dataSamples.otu_ids,
+        },
+        text: dataSamples.otu_labels,
+      }];
+
+      let layout2 = {
+        title: "Top OTUs per Sample"
+      };
+
+      Plotly.newPlot("bubble", trace2, layout2)
     });
 };
 
-// 3. Create a bubble chart that displays each sample.
 
 // Update demographic panel with change in drop down
 function updateMetaData(samplesDemo) {
