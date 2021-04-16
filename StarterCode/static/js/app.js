@@ -20,24 +20,32 @@ function init() {
 
       // Set name from the list for functions to build plots
       updatePlot(data.names[0]);
-      // updateMetaData(data.names[0]);
+      updateMetaData(data.names[0]);
   });
 };
 
+// 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
+
 // Function to read in data from samples.JSON for bar chart
-function updatePlot(samples) {
+function updatePlot(samplesBar) {
 
   // Use D3 library to read in samples.json
     d3.json('samples2.json').then(data => {
+
+
       // filtering data by the input value
-      let dataSamples = data.samples.filter(nameID => nameID.id === samples)[0];
+      let dataSamples = data.samples.filter(nameID => nameID.id === samplesBar)[0];
+
 
       // Trace1 to plot bar graph
       let trace1 = [{
+        // Use sample_values as the values for the bar chart
         x: dataSamples.sample_values.slice(0,10).reverse(),
+        // Use otu_ids as the labels for the bar chart.
         y: dataSamples.otu_ids.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(),
         type: "bar",
         orientation: "h",
+        // Use otu_labels as the hovertext for the chart.
         text: dataSamples.otu_labels,
         }];
 
@@ -46,23 +54,29 @@ function updatePlot(samples) {
         title: "Top OTUs Found in an Individual"
       };
 
+
       Plotly.newPlot("bar", trace1, layout1);
     });
 };
-// 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
-
-// Use sample_values as the values for the bar chart
-
-
-// Use otu_ids as the labels for the bar chart.
-
-
-// Use otu_labels as the hovertext for the chart.
-
-
-
 
 // 3. Create a bubble chart that displays each sample.
+function updateMetaData(samplesBubbles) {
+    d3.json('samples2.json').then(data => {
+
+      // filtering data by the input value
+      let metaSamples = data.metadata.filter(metaID => metaID.id ===samplesBubbles)[0];
+
+      // use d3 to select the demographics panel
+      let panel = d3.select("#sample-metadata")
+
+      // clear the previous data
+      panel.html("");
+
+      // iterate through keys JavaScript 02-Activities, 06 & 07
+      Object.entries(userInfo).forEach(([key, value]) => console.log(`Key: ${key}, Value: ${value}`));
+    };
+
+}
 
 // Use otu_ids for the x values.
 
