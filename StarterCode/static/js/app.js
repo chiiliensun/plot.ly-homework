@@ -73,10 +73,13 @@ function updateMetaData(samplesBubbles) {
       panel.html("");
 
       // iterate through keys JavaScript 02-Activities, 06 & 07
-      Object.entries(userInfo).forEach(([key, value]) => console.log(`Key: ${key}, Value: ${value}`));
+      Object.entries(metaSamples).forEach(([key, value]) => {
+        // append on the panel variable for correct key values
+        panel.append("h5").text()
+        console.log(`Key: ${key}, Value: ${value}`));
     };
 
-}
+};
 
 // Use otu_ids for the x values.
 
