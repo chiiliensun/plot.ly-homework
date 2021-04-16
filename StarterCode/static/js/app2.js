@@ -20,7 +20,7 @@ function init() {
 
       // Set name from the list for functions to build plots
       updateBarPlot(data.names[0]);
-      updateBubblesPlot(data.names[0]);
+      // updateBubblesPlot(data.names[0]);
       updateMetaData(data.names[0]);
   });
 };
@@ -59,42 +59,28 @@ function updateBarPlot(samplesBar) {
 
       // Build plot
       Plotly.newPlot("bar", trace1, layout1);
-    });
-};
+
       // 3. Create a bubble chart that displays each sample.
-function updateBubblesPlot(samplesBubbles) {
-
-  // Use D3 library to read in samples.json
-    d3.json('samples2.json').then(data => {
-
-      // filtering data by the input value
-      let bubbles = data.samples.filter(bubbleID => bubbleID.id == samplesBubbles);
-      let sv_bubbles = bubbles.map(d => d.sample_values);
-      let otuids_bubbles = bubbles.map(d => d.otu_ids);
-      let label_bubbles = bubbles.map(d => d.otu_labels);
-
       // Trace1 to plot bubble graph
       let trace2 = [{
         // Use otu_ids for the x values.
-        x: sv_bubbles[0],
+        x: dataSamples.out_ids,
         // Use sample_values for the y values.
-        y: otuids_bubbles[0],
+        y: dataSamples.sample_values,
         mode: "markers",
-        type: "bubble",
         marker: {
           // Use sample_values for the marker size.
-          size: sv_bubbles[0],
+          size: dataSamples.sample_values,
           // Use otu_ids for the marker colors.
-          color: otuids_bubbles[0],
+          color: dataSamples.otu_ids,
         },
         // Use otu_labels for the text values.
-        text: label_bubbles[0],
+        text: dataSamples.otu_labels,
       }];
 
       // Set layout with title
       let layout2 = {
-        title: "Top OTUs per Sample",
-        width: 1400
+        title: "Top OTUs per Sample"
       };
 
       // Build plot
