@@ -4,6 +4,21 @@ d3.json('samples.json').then(data => {
     console.log(data);
 })
 
+// Initializes the page with a default plot
+function init() {
+
+  // Use D3 to select the dropdown menu (02-Activities 08-Ins_Dropdown_Events)
+  let dropdownMenu = d3.select("#selDataset");
+
+  // Use D3 library to read in samples.json to select the dropdown menu
+  d3.json('samples.json').then(data => {
+
+  };
+
+
+}
+// Function to read in data from samples.JSON for bar chart
+function barchartData
 // 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual
 
 // Use sample_values as the values for the bar chart
